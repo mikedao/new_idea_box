@@ -7,7 +7,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
 
   def setup
-    @user = User.create(username: "example", password: "password")
+    @user = User.create(name: "example", password: "password")
     visit login_path
   end
 
@@ -20,4 +20,3 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     end
   end
 end
-
