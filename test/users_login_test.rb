@@ -37,7 +37,4 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
       assert page.has_content?("Not authorized")
     end
   end
-
-
 end
-
