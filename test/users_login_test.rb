@@ -30,5 +30,14 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   end
 
 
+  test "an unregistered user cannot view a profile" do
+    ApplicationController.any_instance.stubs(:current_user).returns(nil)
+    visit user_path(user)
+    within("#flash_alert") do
+      assert page.has_content?("Not authorized")
+    end
+  end
+
+
 end
 
