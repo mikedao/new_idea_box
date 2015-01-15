@@ -24,7 +24,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     fill_in "session[name]", with: "example"
     fill_in "session[password]", with: "password"
     click_link_or_button "Login"
-    save_and_open_page
     within("#banner") do
       assert page.has_content?("Welcome, example")
     end
@@ -49,5 +48,12 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     end
   end
 
-
+  test 'admin user can view any users\'s profile' do
+    admin_user = User.create(name: "protected", password:"foobar", password_confirmation: "foobar", role: 1)
+    ApplicationController.any_instance.stubs(:current_user).returns(admin_user)
+    visit user_path(user)
+    within("#flash_alert") do
+      assert page.has_content?("Hello Admin")
+    end
+  end
 end
