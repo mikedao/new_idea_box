@@ -24,7 +24,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     fill_in "session[name]", with: "example"
     fill_in "session[password]", with: "password"
     click_link_or_button "Login"
-    save_and_open_page
     within("#banner") do
       assert page.has_content?("Welcome, example")
     end
