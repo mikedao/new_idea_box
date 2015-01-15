@@ -24,6 +24,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     fill_in "session[name]", with: "example"
     fill_in "session[password]", with: "password"
     click_link_or_button "Login"
+    save_and_open_page
     within("#banner") do
       assert page.has_content?("Welcome, example")
     end
@@ -37,4 +38,16 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
       assert page.has_content?("Not authorized")
     end
   end
+
+
+  test "registered user cannot view other users' profile" do
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
+    protected_user = User.create(name: "protected",  password: "password", password_confirmation: "password")
+    visit user_path(protected_user)
+    within("#flash_alert") do
+      assert page.has_content?("You are not authorized to access this page")
+    end
+  end
+
+
 end
