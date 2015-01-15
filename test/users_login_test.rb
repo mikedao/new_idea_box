@@ -19,4 +19,16 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
       assert page.has_content?("Welcome, example")
     end
   end
+
+  test "registered user can log in" do
+    fill_in "session[name]", with: "example"
+    fill_in "session[password]", with: "password"
+    click_link_or_button "Login"
+    within("#banner") do
+      assert page.has_content?("Welcome, example")
+    end
+  end
+
+
 end
+
