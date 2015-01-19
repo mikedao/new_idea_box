@@ -15,10 +15,10 @@ class UserIdeasTest < ActionDispatch::IntegrationTest
   test "a user can view their ideas page" do
     ApplicationController.any_instance.stubs(:current_user)
                         .returns(user)
-    visit idea_path(user)
-    puts user.pretty_print_inspect
+    puts user.id
+    puts user.ideas.first.user_id
     puts idea.pretty_print_inspect
-    save_and_open_page
+    visit idea_path(user)
     assert page.has_content?("idea title")
   end
 

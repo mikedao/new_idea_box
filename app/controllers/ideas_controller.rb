@@ -1,4 +1,6 @@
 class IdeasController < ApplicationController
+
+  before_filter :authorize, only: [:show]
   def show
     if current_user.ideas.all.count == 1
       @ideas = Array.new(1,current_user.ideas.all)
