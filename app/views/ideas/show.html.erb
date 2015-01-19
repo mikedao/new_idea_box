@@ -1,7 +1,9 @@
 <% @ideas.each do |idea| %>
-  <h3>Idea Title</h3>
-  <%= idea.title %></br>
-
-  <h3>Idea Text</h3>
+  <h2><%= idea.title %></h2>
   <%= idea.text %></br>
+  <%= idea.category.name %></br>
+  <%= link_to "Edit", edit_idea_path(idea) %><br>
+  <%= link_to "Destroy", idea, method: :delete %>
 <% end %>
+
+<p><%= link_to "Create New Idea", new_idea_path %></p>

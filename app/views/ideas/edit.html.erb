@@ -1,0 +1,13 @@
+<h1>Edit Idea</h1>
+
+
+<%= form_for(@idea) do |f| %>
+  <%= f.label :title %><br>
+  <%= f.text_field :title %><br>
+  <%= f.label :text %><br>
+  <%= f.text_field :text %><br>
+  <%= f.collection_select(:category_id, Category.all, :id, :name) %>
+  <%= f.submit %>
+
+<% end %>
+
